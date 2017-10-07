@@ -1,0 +1,16 @@
+input {
+  display: block;
+}
+
+h1 {
+  color: blue;
+}
+
+button {
+  margin: 10px;
+}
+
+.monthly-spending-div {
+  height: 40px;
+  background-color: plum;
+}
