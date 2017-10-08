@@ -5,12 +5,10 @@ $(document).ready(readyNow);
 function readyNow() {
   console.log('document ready.');
   $('#submit').on('click', onClick);
+  removeEmployee();
 }
 
-var annualSpending = 0;
-
 function onClick() {
-//
   var $firstName = $('#first-name').val();
   var $lastName = $('#last-name').val();
   var $idNumber = $('#id-number').val();
@@ -19,8 +17,9 @@ function onClick() {
 
 //Appending the DOM
   var $tbody = $('tbody');
-  $tbody.append('<tr><td>' + $firstName + '</td><td>' + $lastName + '</td><td>' + $idNumber + '</td><td>' + $jobTitle + '</td><td>' + $annualSalary + '</td></tr>');
-
+  $tbody.prepend('<tr><td>' + $firstName + '</td><td>' + $lastName +
+  '</td><td>' +  $idNumber + '</td><td>' + $jobTitle + '</td><td>' +
+  $annualSalary +'</td><td><button id ="delete-employee">Delete Employee</button></td></tr>');
 
 //Clearing input fields
   $('#first-name').val('');
@@ -30,29 +29,28 @@ function onClick() {
   $('#annual-salary').val('');
 
 //Calculate monthly spending
+  var annualSpending = 0;
   annualSpending += parseInt($annualSalary);
   var monthlySpending = annualSpending/12;
-  console.log(monthlySpending);
 
 //Append monthly spending to DOM
-  $('#monthly-spending').text(monthlySpending);
+  $('#monthly-spending').text(monthlySpending.toFixed(2));
 
 }
 
-
+//Removing employee in hard mode
+function removeEmployee() {
+  $('tbody').on('click', '#delete-employee', function() {
+    console.log('delete employee' + $('#first-name').val());
+    $(this).parent().parent().remove();
+  });
+}
 
 
 
 /*
 What I need to do:
-- Make an object constructor Employee that will store the data for each employee
-  - Should have properties firstName, lastName, idNumber, jobTitle, annualSalary
-  - Store this in an array? Or maybe store each entrant in an array labeled 'employees' so we have all the data
-  - What does the object do?
-- Create function that will calculate monthly costs
-  - = the sum of each Employee.annualSalary, /12
-- Append to the DOM
-  -
+
 
 
 
