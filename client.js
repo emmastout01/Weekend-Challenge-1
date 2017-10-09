@@ -19,11 +19,32 @@ function onClick() {
   var $jobTitle = $('#job-title').val();
   var $annualSalary = $('#annual-salary').val();
 
-//Append input fields to the DOM:
+//Append input field values to the DOM and check whether or not annual salary is a number:
   var $tbody = $('tbody');
-  $tbody.prepend('<tr><td>' + $firstName + '</td><td>' + $lastName +
-  '</td><td>' +  $idNumber + '</td><td>' + $jobTitle + '</td><td>' +
-  $annualSalary +'</td><td><button id ="delete-employee">Delete Employee</button></td></tr>');
+
+   if (!isNaN($annualSalary)) {
+    $tbody.prepend('<tr><td>' + $firstName + '</td><td>' + $lastName +
+    '</td><td>' +  $idNumber + '</td><td>' + $jobTitle + '</td><td>' +
+    $annualSalary +'</td><td><button id ="delete-employee">Delete Employee</button></td></tr>');
+  } else {
+      alert('Please enter a valid number (containing digits only) for annual salary.');
+     }
+ /* I tried to find a way to check if there was something written in the
+'annual salary' input box, and if nothing was written it would send an alert
+for the user to write something, because otherwise the monthly spending will
+change to NaN as soon as someone does not enter an annual salary. For this, I
+tried:
+
+else if ($annualSalary == '') {
+  alert('Please enter an annual salary');
+}
+and
+
+else if ($annualSalary.length === 0) {
+  alert('Please enter an annual salary');
+}
+Neither of these worked for me.
+*/
 
 //Clear input fields:
   $('#first-name').val('');
